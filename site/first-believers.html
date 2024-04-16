@@ -51,10 +51,20 @@
       background-color: rgba(255, 0, 0, 0.2);
     }
 
+    .expansion{
+      background-color: greenyellow;
+
+    }
+
+
     /* styling blue horizontal lines */
     .pattern {
       height: 100%;
       background-image: repeating-linear-gradient(#fefce8 0px, #fefce8 24px, rgba(251, 191, 36, 0.2) 25px);
+    }
+
+    .pattern.expansion{
+      background-image: repeating-linear-gradient(greenyellow 0px, greenyellow 24px, rgba(251, 191, 36, 0.2) 25px);
     }
 
     td ul li {
@@ -65,41 +75,41 @@
   </style>
 
   <script>
- function valuationCalculator() {
-return {
-investment: 0,
-valuation: 0,
-isPreMoney: true,
-result: '',
-ownershipPercentage: 0,
-calculateOwnership() {
-console.log(this.isPreMoney, this.investment, this.valuation)
-let investment = parseFloat(this.investment);
-let valuation = parseFloat(this.valuation);
-if (isNaN(investment) || isNaN(valuation) || investment <= 0 || valuation <= 0) {
-this.result = "Invalid input. Please enter positive numbers.";
-this.ownershipPercentage = 0;
-return;
- }
-if (this.isPreMoney) {
-// Calculate Post-Money Valuation
-let postMoneyValuation = valuation + investment;
-this.result = `Post-Money Valuation: $${postMoneyValuation.toFixed(2)} million`;
-this.ownershipPercentage = (investment / postMoneyValuation * 100).toFixed(2);
- } else {
-// Calculate Pre-Money Valuation
-let preMoneyValuation = valuation - investment;
-if (preMoneyValuation < 0) {
-this.result = "Investment cannot be greater than the post-money valuation.";
-this.ownershipPercentage = 0;
-return;
- }
-this.result = `Pre-Money Valuation: $${preMoneyValuation.toFixed(2)} million`;
-this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
- }
- },
- };
- }
+    function valuationCalculator() {
+      return {
+        investment: 0,
+        valuation: 0,
+        isPreMoney: true,
+        result: '',
+        ownershipPercentage: 0,
+        calculateOwnership() {
+          console.log(this.isPreMoney, this.investment, this.valuation)
+          let investment = parseFloat(this.investment);
+          let valuation = parseFloat(this.valuation);
+          if (isNaN(investment) || isNaN(valuation) || investment <= 0 || valuation <= 0) {
+            this.result = "Invalid input. Please enter positive numbers.";
+            this.ownershipPercentage = 0;
+            return;
+          }
+          if (this.isPreMoney) {
+            // Calculate Post-Money Valuation
+            let postMoneyValuation = valuation + investment;
+            this.result = `Post-Money Valuation: $${postMoneyValuation.toFixed(2)} million`;
+            this.ownershipPercentage = (investment / postMoneyValuation * 100).toFixed(2);
+          } else {
+            // Calculate Pre-Money Valuation
+            let preMoneyValuation = valuation - investment;
+            if (preMoneyValuation < 0) {
+              this.result = "Investment cannot be greater than the post-money valuation.";
+              this.ownershipPercentage = 0;
+              return;
+            }
+            this.result = `Pre-Money Valuation: $${preMoneyValuation.toFixed(2)} million`;
+            this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
+          }
+        },
+      };
+    }
   </script>
 
 </head>
@@ -116,9 +126,11 @@ this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
             <div>
               <strong class="text-2xl pb-2 underline">Pre-money vs Post-money Valuation</strong>
 
-              <p class="py-4">Pre-money valuation refers to the value of a company before it receives new financing or capital
+              <p class="py-4">Pre-money valuation refers to the value of a company before it receives new financing or
+                capital
                 injection.<br><br>Post-money valuation is the value of the company immediately after it receives that
-                financing.<br><br>The difference between them is the amount of new financing added. For example, if a company
+                financing.<br><br>The difference between them is the amount of new financing added. For example, if a
+                company
                 has a pre-money valuation of $100 million and receives $25 million in new investment, its post-money
                 valuation would be $125 million.</p>
 
@@ -147,71 +159,79 @@ this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
       </div>
 
 
+
+
       <div x-data="calculator()" class="calculator p-4 rounded-lg shadow-lg border flex flex-col space-y-2">
         <h2 class="font-semibold">Valuation Calculator</h2>
 
         <div>
-            <label for="valuation-kind" class="block text-sm font-medium leading-6 text-gray-900">Valuation Kind</label>
-            <div class="w-full">
-              <select id="valuation-kind" x-model="valuationKind" class=" block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                <option value="pre">Pre-Money</option>
-                <option value="post">Post-Money</option>
+          <label for="valuation-kind" class="block text-sm font-medium leading-6 text-gray-900">Valuation Kind</label>
+          <div class="w-full">
+            <select id="valuation-kind" x-model="valuationKind"
+              class=" block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              <option value="pre">Pre-Money</option>
+              <option value="post">Post-Money</option>
             </select>
           </div>
         </div>
         <div>
-            <label for="total-valuation" class="block text-sm font-medium leading-6 text-gray-900">Total Valuation</label>
-            <div class="flex"><div class="bg-gray-100 px-2 rounded flex space-x-2">
+          <label for="total-valuation" class="block text-sm font-medium leading-6 text-gray-900">Total Valuation</label>
+          <div class="flex">
+            <div class="bg-gray-100 px-2 rounded flex space-x-2">
               <span>$</span>
-              <input class="bg-gray-100 p-0.5 text-right" type="number" id="total-valuation" x-model.number="totalValuation" min="0" step="0.01">
+              <input class="bg-gray-100 p-0.5 text-right" type="number" id="total-valuation"
+                x-model.number="totalValuation" min="0" step="0.01">
             </div>
           </div>
         </div>
         <div>
           <label for="investment" class="block text-sm font-medium leading-6 text-gray-900">Total Investment</label>
-          <div class="flex"><div class="bg-gray-100 px-2 rounded flex space-x-2">
-            <span>$</span>
-            <input class="bg-gray-100 p-0.5 text-right" type="number" id="investment" x-model.number="investment" min="0" step="0.01">
+          <div class="flex">
+            <div class="bg-gray-100 px-2 rounded flex space-x-2">
+              <span>$</span>
+              <input class="bg-gray-100 p-0.5 text-right" type="number" id="investment" x-model.number="investment"
+                min="0" step="0.01">
+            </div>
           </div>
-       </div>
-      </div>
+        </div>
 
 
         <div class="border p-4 rounded font-mono bg-gray-50">
-            <p x-text="valuationKindText + ' Valuation: $' + totalValuation.toFixed(2) + ' million'"></p>
-            <p x-text="'Ownership Percentage: ' + ownershipPercentage.toFixed(2) + '%'"></p>
+          <p x-text="valuationKindText + ' Valuation: $' + totalValuation.toFixed(2) + ' million'"></p>
+          <p x-text="'Ownership Percentage: ' + ownershipPercentage.toFixed(2) + '%'"></p>
         </div>
-    </div>
+      </div>
 
-    <script>
+      <script>
         function calculator() {
-            return {
-                valuationKind: 'pre',
-                totalValuation: 0,
-                investment: 0,
-                get valuationKindText() {
-                    return this.valuationKind === 'pre' ? 'Pre-Money' : 'Post-Money';
-                },
-                get ownershipPercentage() {
-                  let op = 0;
-                    if (this.valuationKind === 'pre') {
-                         op = (this.investment / (this.totalValuation + this.investment)) * 100;
-                    } else {
-                       op = (this.investment / this.totalValuation) * 100;
-                    }
+          return {
+            valuationKind: 'pre',
+            totalValuation: 0,
+            investment: 0,
+            get valuationKindText() {
+              return this.valuationKind === 'pre' ? 'Pre-Money' : 'Post-Money';
+            },
+            get ownershipPercentage() {
+              let op = 0;
+              if (this.valuationKind === 'pre') {
+                op = (this.investment / (this.totalValuation + this.investment)) * 100;
+              } else {
+                op = (this.investment / this.totalValuation) * 100;
+              }
 
-                    // if op is NaN, return 0
-                    return isNaN(op) ? 0 : op;
-                }
-            };
+              // if op is NaN, return 0
+              return isNaN(op) ? 0 : op;
+            }
+          };
         }
-    </script>
+      </script>
 
       <h2 class="text-4xl font-bold">Week 2 - Notes</h2>
       <h3 class="text-4xl font-bold">Summaries</h3>
       <h4 class="text-2xl font-bold">Why</h4>
       <ul class="list-disc px-4">
-        <li><a class="underline" href="https://simonsinek.com/">Simon Sinek</a> Start With Why <a href="https://www.youtube.com/watch?v=qp0HIF3SfI4" target="_blank"
+        <li><a class="underline" href="https://simonsinek.com/">Simon Sinek</a> Start With Why <a
+            href="https://www.youtube.com/watch?v=qp0HIF3SfI4" target="_blank"
             class="text-gray-500 hover:text-black hover:border-b hover:border-gray-500"><i
               class="fa-regular text-lg fa-link"></i></a></li>
       </ul>
@@ -235,7 +255,8 @@ this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
                 </ul>
               </div>
             </div>
-            <p><a class="underline" href="https://simonsinek.com/">Simon Sinek's</a> central thesis is that most companies do business from the outside in, starting with the "what"
+            <p><a class="underline" href="https://simonsinek.com/">Simon Sinek's</a> central thesis is that most
+              companies do business from the outside in, starting with the "what"
               and moving to the "how," but very few focus on the "why." However, companies that are more successful and
               influential operate from the inside out, starting with "why."</p>
             <div class="">
@@ -272,6 +293,111 @@ this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
           </div>
         </div>
       </div>
+
+      <div class="bg-green-100 text-green-900 kalam-regular shadow rounded w-full expansion">
+        <div class="bg-green-100 p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug  w-full">
+            <div class="w-full text-center"><i class="fa-solid fa-asterisk"></i> <span class="underline">EXTRA NOTES ONLY</span>  - YOU CAN SKIP PAST THESE IF YOU WANT <i class="fa-solid fa-asterisk"></i></div>
+            <div>
+              <strong class="text-2xl pb-2 underline">"Finding your why"</strong>
+              <p>Take time to reflect on what drives you beyond the potential for financial return:</p>
+              <ul class="list-disc pl-4 pt-1">
+                <li class="pb-2"><span class="kalam-bold">Personal Fulfillment</span> -Are you driven by the desire to
+                  mentor and guide budding entrepreneurs? Does helping startups grow provide you with personal
+                  satisfaction?</li>
+
+                <li class="pb-2"><span class="kalam-bold">Professional Goals</span> - Are you looking to fill gaps in
+                  your portfolio, or perhaps you see angel investing as a way to stay connected with emerging trends in
+                  your industry?</li>
+
+                <li class="pb-2"><span class="kalam-bold">Impact Objectives</span> - Do you prioritize investments that
+                  aim to solve significant social problems, or are you inspired by certain technologies or innovative
+                  business models?
+                </li>
+
+              </ul>
+
+            </div>
+
+            <div>
+              <strong class="text-2xl pb-2 underline">Write a Personal Mission Statement</strong>
+              <p>Craft a mission statement that encapsulates your "why." This statement should reflect your core
+                motivations and how they shape your investment strategies. It acts as a guiding beacon for future
+                decisions.</p>
+            </div>
+
+            <div>
+              <strong class="text-2xl pb-2 underline">Assess Alignment with Investment Opportunities</strong>
+              <p>With a clear "why" in place, evaluate potential investments to see how well they align with your
+                mission:</p>
+              <ul class="list-disc pl-4 pt-1">
+                <li class="pb-2"><span class="kalam-bold">Mission Fit</span> - Does the startup's mission resonate with
+                  your values and beliefs?</li>
+
+                <li class="pb-2"><span class="kalam-bold">Founder Dynamics</span> - Do the founders exhibit passion,
+                  integrity, and the potential to execute their vision?
+                </li>
+
+                <li class="pb-2"><span class="kalam-bold">Impact Potential</span> - How does the startup intend to
+                  impact its community, industry, or the world at large?
+                </li>
+
+              </ul>
+
+            </div>
+
+
+            <div>
+              <strong class="text-2xl pb-2 underline">Strategic Approach</strong>
+              <p>How you invest should reflect why you invest. This might involve:</p>
+              <ul class="list-disc pl-4 pt-1">
+                <li class="pb-2"><span class="kalam-bold">Choosing Specific Sectors</span> - Concentrate on industries
+                  where you believe you can make the most impact, such as clean technology or healthcare.</li>
+
+                <li class="pb-2"><span class="kalam-bold">Value-Added Investing</span> - Look for opportunities where
+                  you can provide more than just capital—perhaps guidance, networking, or strategic advice.
+
+                </li>
+
+                <li class="pb-2"><span class="kalam-bold">Community Engagement</span> - Become involved in local startup
+                  ecosystems or online platforms where you can mentor new entrepreneurs.
+
+                </li>
+
+              </ul>
+
+            </div>
+
+
+            <div>
+              <strong class="text-2xl pb-2 underline">Continuous Learning and Adjustment</strong>
+              <p>Finding your "why" is an ongoing process. As you learn from each investment, reflect on:</p>
+              <ul class="list-disc pl-4 pt-1">
+                <li class="pb-2"><span class="kalam-bold">Feedback and Outcomes</span> - Analyze the successes and
+                  failures of your investments to refine your understanding of your "why."</li>
+
+                <li class="pb-2"><span class="kalam-bold">Market Changes</span> - Stay informed about trends and shifts
+                  in the startup ecosystem that might prompt a reassessment of your investment strategy.
+
+                </li>
+              </ul>
+
+            </div>
+
+            <div>
+              <strong class="text-2xl pb-2 underline">Networking and Collaboration</strong>
+              <p>Engage with other investors and thought leaders to explore and discuss your motivations and strategies. This can provide new insights and reinforce or challenge your existing framework.
+
+              </p>
+
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
       <h4 class="text-2xl font-bold">VC vs. other asset classes</h4>
 
       <ul class="list-disc px-4">
@@ -848,7 +974,9 @@ this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
                     <td><strong>Critique of Random Investment Models</strong></td>
                     <td>
                       <ul class="list-disc pl-4">
-                        <li>Criticizes the use of <a class="underline" href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo Simulations</a> for VC investment strategies</li>
+                        <li>Criticizes the use of <a class="underline"
+                            href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Monte Carlo Simulations</a> for VC
+                          investment strategies</li>
                         <li>argues this is mistakenly apply random chance methodologies that are actually
                           deterministic</li>
                         <li>merely increasing the number of investments will not proportionally increase success
@@ -1019,7 +1147,11 @@ this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
 
           <div class="kalam-regular shadow-lg rounded-lg my-4  w-full">
             <div class="pattern p-4">
-              <p>&quot;<strong>Thiel vs. AngelList: Who is Right?</strong>&quot; compares the viewpoints of <a class="text-blue-700 underline" href="https://en.wikipedia.org/wiki/Peter_Thiel">Peter Thiel</a> and <a class="text-blue-700 underline" href="https://www.angellist.com/blog-authors/abe-othman">Abe Othman</a> of AngelList:<br><br></p>
+              <p>&quot;<strong>Thiel vs. AngelList: Who is Right?</strong>&quot; compares the viewpoints of <a
+                  class="text-blue-700 underline" href="https://en.wikipedia.org/wiki/Peter_Thiel">Peter Thiel</a> and
+                <a class="text-blue-700 underline" href="https://www.angellist.com/blog-authors/abe-othman">Abe
+                  Othman</a> of AngelList:<br><br>
+              </p>
               <table>
                 <thead>
                   <tr class="border-b-2 border-yellow-900/25 text-xl text-center uppercase">
