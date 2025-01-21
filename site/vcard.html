@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Text to vCard Converter</title>
+        <style>
+            body {
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    sans-serif;
+                max-width: 800px;
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            textarea,
+            input[type="text"] {
+                width: 100%;
+                padding: 0.5rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+            textarea {
+                min-height: 200px;
+            }
+            button {
+                background: #0070f3;
+                color: white;
+                border: none;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                cursor: pointer;
+                max-width: fit-content;
+            }
+            button:disabled {
+                background: #ccc;
+            }
+            #error {
+                color: red;
+                margin-top: 1rem;
+            }
+            .loading {
+                display: none;
+                margin-top: 1rem;
+            }
+            .config-section {
+                background: #f5f5f5;
+                padding: 1rem;
+                border-radius: 4px;
+                margin: 1rem 0;
+            }
+            .config-row {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1rem;
+            }
+            .config-row:last-child {
+                margin-bottom: 0;
+            }
+            .status {
+                font-size: 0.875rem;
+                color: #666;
+            }
+            .status.success {
+                color: #22c55e;
+            }
+            .hidden {
+                display: none;
+            }
+            .config-toggle {
+                color: #0070f3;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            .config-toggle:hover {
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Text to vCard Converter</h1>
+
+            <div id="configToggleContainer">
+                <span id="configToggle" class="config-toggle"
+                    >Show Configuration</span
+                >
+            </div>
+
+            <div id="configSection" class="config-section hidden">
+                <h2>Configuration</h2>
+                <div class="config-row">
+                    <input
+                        type="text"
+                        id="apiKey"
+                        placeholder="Enter your Anthropic API key"
+                    />
+                    <button id="saveConfig">Save Configuration</button>
+                </div>
+                <div id="configStatus" class="status"></div>
+            </div>
+
+            <p>Enter text about a person to generate their vCard:</p>
+            <textarea
+                id="inputText"
+                placeholder="Enter text about the person (e.g., John Doe is a software engineer at Tech Corp. His email is john.doe@example.com and phone number is +1-555-0123)"
+            ></textarea>
+
+            <div>
+                <button id="convertBtn">Convert to vCard</button>
+            </div>
+
+            <div class="loading" id="loading">Converting...</div>
+            <div id="error"></div>
+        </div>
+
+        <script>
+            const CONFIG_KEY = "vcard_converter_config";
+            const API_PROMPT = `Convert the following text into a vCard (VCF) format. Extract the name and contact details. Only include fields that are explicitly mentioned in the text. Return just the vCard format text:
+
+`;
+
+            // Toggle configuration visibility
+            function toggleConfig() {
+                const configSection = document.getElementById("configSection");
+                const configToggle = document.getElementById("configToggle");
+                const isHidden = configSection.classList.contains("hidden");
+
+                configSection.classList.toggle("hidden");
+                configToggle.textContent = isHidden
+                    ? "Hide Configuration"
+                    : "Show Configuration";
+            }
+
+            // Load configuration on startup
+            function loadConfig() {
+                const config = localStorage.getItem(CONFIG_KEY);
+                if (config) {
+                    const { apiKey } = JSON.parse(config);
+                    document.getElementById("apiKey").value = apiKey;
+                    document
+                        .getElementById("configSection")
+                        .classList.add("hidden");
+                    document.getElementById("configToggle").textContent =
+                        "Show Configuration";
+                    updateConfigStatus("Configuration loaded", true);
+                } else {
+                    document
+                        .getElementById("configSection")
+                        .classList.remove("hidden");
+                    document.getElementById("configToggle").textContent =
+                        "Hide Configuration";
+                }
+            }
+
+            // Save configuration
+            function saveConfig() {
+                const apiKey = document.getElementById("apiKey").value.trim();
+
+                if (!apiKey) {
+                    updateConfigStatus("API key is required", false);
+                    return;
+                }
+
+                const config = { apiKey };
+                localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+                updateConfigStatus("Configuration saved successfully", true);
+
+                // Hide configuration section after saving
+                document
+                    .getElementById("configSection")
+                    .classList.add("hidden");
+                document.getElementById("configToggle").textContent =
+                    "Show Configuration";
+            }
+
+            function updateConfigStatus(message, isSuccess = false) {
+                const status = document.getElementById("configStatus");
+                status.textContent = message;
+                status.className = `status ${isSuccess ? "success" : ""}`;
+            }
+
+            async function convertToVCard() {
+                const config = localStorage.getItem(CONFIG_KEY);
+                if (!config) {
+                    error.textContent = "Please configure your API key first";
+                    document
+                        .getElementById("configSection")
+                        .classList.remove("hidden");
+                    return;
+                }
+
+                const { apiKey } = JSON.parse(config);
+                const inputText = document.getElementById("inputText").value;
+                const button = document.getElementById("convertBtn");
+                const loading = document.getElementById("loading");
+                const error = document.getElementById("error");
+
+                if (!inputText.trim()) {
+                    error.textContent = "Please enter some text";
+                    return;
+                }
+
+                button.disabled = true;
+                loading.style.display = "block";
+                error.textContent = "";
+
+                try {
+                    const response = await fetch(
+                        "https://api.anthropic.com/v1/messages",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "x-api-key": apiKey,
+                                "anthropic-version": "2023-06-01",
+                                "anthropic-dangerous-direct-browser-access":
+                                    "true",
+                            },
+                            body: JSON.stringify({
+                                model: "claude-3-5-sonnet-20241022",
+                                max_tokens: 1024,
+                                messages: [
+                                    {
+                                        role: "user",
+                                        content: API_PROMPT + inputText,
+                                    },
+                                ],
+                            }),
+                        },
+                    );
+
+                    if (!response.ok) {
+                        throw new Error("API request failed");
+                    }
+
+                    const data = await response.json();
+                    const vCardContent = data.content[0].text;
+
+                    // Extract name from vCard content
+                    const nameMatch = vCardContent.match(/FN:(.*?)(?:\r\n|\n)/);
+                    const fileName = nameMatch
+                        ? nameMatch[1]
+                              .toLowerCase()
+                              .replace(/\s+/g, "_")
+                              .replace(/[^a-z0-9_]/g, "") + ".vcf"
+                        : "contact.vcf";
+
+                    // Create and download the file
+                    const blob = new Blob([vCardContent], {
+                        type: "text/vcard",
+                    });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                } catch (err) {
+                    error.textContent = "An error occurred. Please try again.";
+                    console.error(err);
+                } finally {
+                    button.disabled = false;
+                    loading.style.display = "none";
+                }
+            }
+
+            // Initialize
+            document.addEventListener("DOMContentLoaded", loadConfig);
+            document
+                .getElementById("saveConfig")
+                .addEventListener("click", saveConfig);
+            document
+                .getElementById("convertBtn")
+                .addEventListener("click", convertToVCard);
+            document
+                .getElementById("configToggle")
+                .addEventListener("click", toggleConfig);
+        </script>
+    </body>
+</html>
