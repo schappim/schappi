@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SM Week 0 Cheat Sheet | Marcus Schappi</title>
+    <script src="https://kit.fontawesome.com/2d5a909a29.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://livejs.com/live.js"></script>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      .kalam-light {
+        font-family: "Kalam", cursive;
+        font-weight: 300;
+        font-style: normal;
+      }
+
+      .kalam-regular {
+        font-family: "Kalam", cursive;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      .kalam-bold {
+        font-family: "Kalam", cursive;
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      /* styling paper */
+      .paper {
+        position: relative;
+        margin: 20px auto;
+
+        background-color: #fefce8;
+        color: #451a03;
+      }
+
+      /* styling red vertical line */
+      .paper::before {
+        content: '';
+        width: 2px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 40px;
+        background-color: rgba(255, 0, 0, 0.2);
+      }
+
+      .expansion{
+        background-color: greenyellow;
+
+      }
+
+
+      /* styling blue horizontal lines */
+      .pattern {
+        height: 100%;
+        background-image: repeating-linear-gradient(#fefce8 0px, #fefce8 24px, rgba(251, 191, 36, 0.2) 25px);
+      }
+
+      .pattern.expansion{
+        background-image: repeating-linear-gradient(greenyellow 0px, greenyellow 24px, rgba(251, 191, 36, 0.2) 25px);
+      }
+
+      td ul li {
+        padding-bottom: 1rem;
+      }
+
+      /* styling text content */
+    </style>
+    <script>
+      function valuationCalculator() {
+        return {
+          investment: 0,
+          valuation: 0,
+          isPreMoney: true,
+          result: '',
+          ownershipPercentage: 0,
+          calculateOwnership() {
+            console.log(this.isPreMoney, this.investment, this.valuation)
+            let investment = parseFloat(this.investment);
+            let valuation = parseFloat(this.valuation);
+            if (isNaN(investment) || isNaN(valuation) || investment <= 0 || valuation <= 0) {
+              this.result = "Invalid input. Please enter positive numbers.";
+              this.ownershipPercentage = 0;
+              return;
+            }
+            if (this.isPreMoney) {
+              // Calculate Post-Money Valuation
+              let postMoneyValuation = valuation + investment;
+              this.result = `Post-Money Valuation: $${postMoneyValuation.toFixed(2)} million`;
+              this.ownershipPercentage = (investment / postMoneyValuation * 100).toFixed(2);
+            } else {
+              // Calculate Pre-Money Valuation
+              let preMoneyValuation = valuation - investment;
+              if (preMoneyValuation < 0) {
+                this.result = "Investment cannot be greater than the post-money valuation.";
+                this.ownershipPercentage = 0;
+                return;
+              }
+              this.result = `Pre-Money Valuation: $${preMoneyValuation.toFixed(2)} million`;
+              this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
+            }
+          },
+        };
+      }
+    </script>
+  </head>
+  <body>
+    <div class="flex justify-center p-4 lg:p-16 text-lg">
+      <div class="w-full max-w-prose flex flex-col space-y-8">
+        <div><a class="text-blue-600 underline" href="/">← Back Home</a></div>
+        <h1 class="text-4xl font-black text-center">SM Week 0 Cheat Sheet</h1>
+        <h2 class="text-4xl font-bold">Week 0 - Notes</h2>
+        <div class="paper kalam-regular shadow rounded w-full">
+          <div class="pattern p-4 pl-14">
+            <div class="flex flex-col space-y-4 leading-snug  w-full">
+              <div>
+                <h2  class="font-bold text-2xl">Do Things that Don't Scale</h2>
+                <div class="p-4 bg-yellow-500 bg-opacity-25 my-4 border-2 border-yellow-400 rounded">
+                  <p><strong>TL;DR:</strong> Startups succeed by doing unscalable, hands-on work in the early stages to recruit users, refine their product, and build strong customer relationships, laying the groundwork for future growth.</p>
+                </div>
+                <a href="https://www.paulgraham.com/ds.html" class="text-xl pb-2 underline">Paul Graham's Essay <i
+                class="fa-regular text-lg fa-link"></i></a>
+                <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                  <li>Startups rarely take off automatically; <span class="bg-pink-300 bg-opacity-50">founders must actively work to make them succeed</span>.</li>
+                  <li>Early on, <span class="bg-green-300 bg-opacity-50">manual user recruitment is crucial</span> because you cannot simply wait for users to appear.</li>
+                  <li>Stripe showed how important early, direct user acquisition can be, especially by setting people up immediately rather than sending links.</li>
+                  <li>Airbnb’s early founders went door to door in New York, helping users list properties, proving that personal engagement can be the difference between failure and success.</li>
+                  <li>Most startups are fragile in the beginning, and founders often underestimate their potential by judging them like established companies.</li>
+                  <li>The real question is how large the startup could become if the founders took the right steps, not whether it is currently dominating the market.</li>
+                  <li><span class="bg-yellow-300 bg-opacity-50">Observing initial users closely helps refine the product</span> and find enthusiastic audiences; Pinterest, for example, attracted design bloggers at first.</li>
+                  <li>Going above and beyond to make the first users happy is invaluable, even if it feels unscalable. These <span class="bg-red-300 bg-opacity-50">early interactions shape the startup’s culture</span> of customer care.</li>
+                  <li>Steve Jobs’s idea of <span class="bg-blue-300 bg-opacity-50">making products “insanely great” applies to the user experience</span> when a product is still new, buggy or incomplete, by compensating with personal attention.</li>
+                  <li><span class="bg-purple-300 bg-opacity-50">Engaging directly with early users provides rapid feedback</span> that might be lost at a larger scale, offering crucial insights for improvements.</li>
+                  <li>Narrowly targeting a subset of the market (such as a single university or a particular user profile) can create a solid core of support before broadening.</li>
+                  <li>For hardware startups, <span class="bg-green-300 bg-opacity-50">assembling products by hand</span> (like Meraki did) can solve early manufacturing hurdles, provide learning experiences, and prepare for larger production.</li>
+                  <li>Acting like a consultant for one key user can help a business-to-business startup develop a product that truly meets users’ needs and can then be scaled.</li>
+                  <li>Sometimes you can <span class="bg-orange-300 bg-opacity-50">operate parts of your service manually behind the scenes at first</span>, allowing quick launches and hands-on understanding before automating.</li>
+                  <li>Big launches rarely substitute for genuine user recruitment. Partnerships and press coverage tend to yield less traction than personal, hands-on methods.</li>
+                  <li>Combining a plan for what you will build with an unscalable approach to gain initial traction is common in successful startups, becoming part of their DNA as they grow.</li>
+                </ul>
+                <a href="https://www.ycombinator.com/library/L8-yc-s-group-partners-discuss-doing-things-that-don-t-scale?carousel=Office%20Hours" class="text-xl pb-2 underline"> YC's Group Partners Discuss Doing Things That Don't Scale <i
+                class="fa-regular text-lg fa-link"></i></i></a>
+              <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                <li>
+                  <p><strong>Context of the Essay</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>Paul Graham’s essay <em>“Do Things That Don’t Scale”</em> was initially contrarian because early-stage startups historically focused heavily on scalability.</li>
+                    <li>The essay shifted Silicon Valley culture by stressing the importance of personal, manual efforts in a startup’s early days.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>Why Early Startups Shouldn’t Fixate on Scalability</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>The biggest obstacle for new startups is finding a product people actually want, not the risk of servers crashing.</li>
+                    <li>Prioritising customers’ immediate problems allows founders to learn quickly before investing in large-scale solutions.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>Airbnb’s Origin Story</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>Rather than waiting for hosts to upload perfect photos, the founders took the photos themselves.</li>
+                    <li>This unscalable, hands-on effort improved listings and kickstarted growth.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>Fleek’s Manual Market Approach</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>The team physically transported boxes of secondhand clothes to different shops to understand buyer demand.</li>
+                    <li>By learning in-person which items sold, they rapidly refined their Marketplace model before automating.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>Stripe and Algolia’s Hands-On Implementations</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>Stripe’s founders personally helped customers integrate the payment API.</li>
+                    <li>Algolia did the same with search implementations, forging close customer relationships and gaining immediate product feedback.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>DoorDash’s One-Day MVP</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>The founders set up a rudimentary site in a single day with Google Forms and personal phones.</li>
+                    <li>This validated demand rapidly without a complex technical build.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>Avoiding Perfectionism Learned from Big Tech</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>Former employees of large companies may overly fixate on airtight solutions.</li>
+                    <li>Startups can’t afford that; they must test, fail, and adapt quickly.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>Consulting vs. Software Growth</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>Some early SaaS founders rely on consulting revenue to stay afloat.</li>
+                    <li>While manual work can confirm demand, it won’t grow a venture-scale business—eventually the product must stand on its own.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>When to Transition</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>Initially, manual efforts create valuable customer insights.</li>
+                    <li>Once demand is proven, founders should shift focus to automation and scalable processes.</li>
+                  </ul>
+                </li>
+                <li>
+                  <p><strong>Key Takeaway</strong></p>
+                  <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                    <li>Unscalable tasks give startups a genuine edge: deeper customer connections, quicker feedback loops, and proof of concept.</li>
+                    <li>If demand surges, scaling issues become a <em>good</em> problem—one that’s solvable once you know customers truly want your product.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug  w-full">
+            <div>
+              <h2  class="font-bold text-2xl">What Blackbird Looks for in Founders Today</h2>
+              <div class="p-4 bg-yellow-500 bg-opacity-25 my-4 border-2 border-yellow-400 rounded">
+                <p><strong>TL;DR:</strong> Blackbird seeks passionate, customer-focused founders with unique expertise, visionary plans, resilience, curiosity, and the ability to attract top talent while pursuing bold, unconventional ideas. Long-term commitment over present achievements.</p>
+              </div>
+              <a href="https://www.blackbird.vc/blog/what-blackbird-looks-for-in-founders-today" class="text-2xl font-bold ">The Original Blog Post <i
+                class="fa-regular text-lg fa-link"></i></a>
+              <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                <li>
+                  Blackbird invests in founders with bold ideas from the very beginning, focusing on unique traits and long-term commitment.
+                </li>
+                <li>They put an emphasis on investing in founders’ long-term potential rather than just present achievements.</li>
+              </ul>
+              <h3 class="text-2xl font-bold ">The Seven Qualities They Seek in Founders</h3>
+              <div class="flex space-x-4 lg:space-x-0 mt-4 mb-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-regular fa-solid fa-head-side-heart opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Doing Their Life’s Work</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Deeply passionate about the problem they’re solving.</li>
+                    <li>Unique background or expertise giving them a clear edge.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 my-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-duotone fa-face-smiling-hands opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Customer Obsessed</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Intimately understand their customers’ pain points.</li>
+                    <li>Constantly gather feedback and iterate to address real needs.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 my-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-duotone fa-map-location opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Charismatic Vision with a Clear Plan</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Present a transformative product that will redefine the market.</li>
+                    <li>Chart a credible roadmap for Act I, II, III, and beyond.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 my-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-duotone fa-honey-pot opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Honeypot for Talent</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Attract exceptional people and foster a strong culture.</li>
+                    <li>Acknowledge gaps and bring in the best to fill them.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 my-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-duotone fa-dumbbell opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Resilient</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Persistent in the face of inevitable startup challenges.</li>
+                    <li>Have a track record (including possible failures) that proves grit.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 my-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-duotone fa-user-hair-buns opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Fresh and Strange</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Pursue unconventional ideas that stand out from trends.</li>
+                    <li>Look for non-consensus possibilities with high potential.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 my-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-duotone fa-regular fa-head-side-gear opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Learn-it-alls</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Approach building a company with curiosity and openness.</li>
+                    <li>Rapidly level up their skills and knowledge.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug  w-full">
+            <div>
+              <h2  class="font-bold text-2xl">What is your unfair advantage?</h2>
+              <a href="https://www.airtree.vc/open-source-vc/what-is-your-unfair-advantage" class="text-2xl font-bold ">The Original Blog Post <i
+                class="fa-regular text-lg fa-link"></i></a>
+              <div class="p-4 bg-yellow-500 bg-opacity-25 my-4 border-2 border-yellow-400 rounded">
+                <p><strong>TL;DR:</strong> Good businesses solve problems and delight customers, but great businesses also have structural advantages (e.g. economies of scale, network effects, switching costs, brand, talent brand, regulation, IP) that make them harder to compete with. These advantages aren’t permanent, so businesses must adapt and invest in them continuously. Example: Uber initially relied on network effects but now diversifies its strategy to remain competitive.</p>
+              </div>
+              <h3 class="text-2xl font-bold ">Good vs Great Businesses</h3>
+              <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                <li>A good business solves a real problem and delights customers.</li>
+                <li>A great business does all the above <strong>and</strong> has a structural advantage that makes it harder for competitors to catch up.</li>
+              </ul>
+              <h3 class="text-2xl font-bold ">Types of Unfair Advantages</h3>
+              <div class="flex space-x-4 lg:space-x-0 mt-4 mb-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0">
+                  <i class="fa-duotone fa-arrow-up-right-dots  opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Economies of Scale</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Larger scale → lower relative costs</li>
+                    <li>Reinforcing cycle of lower prices, higher demand, and increasing bargaining power (e.g. Amazon, Wal-Mart)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 mt-4 mb-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-duotone fa-hexagon-nodes opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Network Effects</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Value increases as more people use the product or service</li>
+                    <li>Tends towards monopoly (e.g. telephone networks, social media platforms)</li>
+                    <li>Often a reason for large, early-stage funding to outpace competitors</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 mt-4 mb-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0"><i class="fa-duotone fa-user-clock opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Switching Costs</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>High difficulty in leaving or switching providers (e.g. Salesforce)</li>
+                    <li>Customers pay more to avoid the hassle of moving to a new system</li>
+                    <li>Opportunity to upsell and provide additional products without losing the customer</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 mt-4 mb-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0">
+                  <i class="fa-duotone fa-shield-check  opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Brand</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Long-term asset built on trust and consistent customer experience</li>
+                    <li>Customers identify with the brand’s values and community</li>
+                    <li>Strong internal culture and brand consistency are crucial</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 mt-4 mb-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0">
+                  <i class="fa-regular fa-magnet  opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Talent Brand</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Ability to attract top-tier talent (e.g. SpaceX, Google)</li>
+                    <li>Exceptional employees can significantly boost innovation and product development</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 mt-4 mb-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0">
+                  <i class="fa-duotone fa-regular fa-building-columns opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Regulation</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>In regulated industries, obtaining licences or approvals can block new entrants</li>
+                    <li>Compliance costs and time create barriers (e.g. banking licences, medical devices)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex space-x-4 lg:space-x-0 mt-4 mb-6">
+                <div class="text-6xl w-1/5 text-center flex-shrink-0">
+                  <i class="fa-duotone fa-solid fa-file-certificate opacity-60"></i></div>
+                <div>
+                  <h4 class="underline text-xl">Intellectual Property (IP)</h4>
+                  <ul class="list-disc pl-4 space-y-1 ">
+                    <li>Patents, trademarks, and trade secrets can keep competitors at bay</li>
+                    <li>Most effective for products that change slowly (e.g. biotech), but trickier for fast-evolving software</li>
+                  </ul>
+                </div>
+              </div>
+              <h3 class="text-2xl font-bold ">Unfair Advantages Are Not Permanent</h3>
+              <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                <li>Market changes can erode advantages</li>
+                <li>Brands can lose relevance, network effects can become less potent, and competitors can innovate faster</li>
+                <li>Constant vigilance and adaptation are essential</li>
+              </ul>
+              <h3 class="text-2xl font-bold ">Key Takeaway</h3>
+              <ul class="list-disc pl-4 space-y-4 mt-2 mb-8">
+                <li>Incorporate one or more structural advantages into your business model early</li>
+                <li>Keep investing in and adapting these advantages over time</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug  w-full">
+            <div>
+              <a href="https://pmf.firstround.com" class="text-2xl pb-2 underline">First Round's PMF Framework  <i
+                class="fa-regular text-lg fa-link"></i></a>
+              <ul class="list-disc pl-4 space-y-6 mt-2">
+                <li>First Round has created a framework for B2B startups to systematically work towards product-market fit rather than rely purely on luck or guesswork.</li>
+                <li>The program breaks product-market fit into four levels:
+                  <ol class="list-decimal pl-5 space-y-4 mt-2">
+                    <li><strong class="bg-red-300 bg-opacity-50 px-1">Nascent</strong> (finding a few customers with a pressing problem)</li>
+                    <li><strong class="bg-orange-300 bg-opacity-50 px-1">Developing</strong> (more repeatable sales and customer satisfaction)</li>
+                    <li><strong class="bg-yellow-300 bg-opacity-50 px-1">Strong</strong> (rising inbound interest, significant growth)</li>
+                    <li><strong class="bg-green-300 bg-opacity-50 px-1">Extreme</strong> (widespread demand, high retention)</li>
+                  </ol>
+                </li>
+                <li>Each level focuses on three key dimensions:
+                  <ul class="pl-2 space-y-3 mt-2">
+                    <li><span class="font-semibold bg-yellow-300 bg-opacity-25 px-1"><i class="fa-regular text-lg fa-thumbs-up"></i>&nbsp;Satisfaction</span> (does the product solve a critical problem?)</li>
+                    <li><span class="font-semibold bg-yellow-300 bg-opacity-25 px-1"><i class="fa-regular text-lg fa-users"></i>&nbsp;Demand</span> (are customers lining up?),</li>
+                    <li><span class="font-semibold bg-yellow-300 bg-opacity-25 px-1"><i class="fa-regular text-lg fa-gear-code"></i>&nbsp;and Efficiency</span> (can the product be delivered repeatably and cost-effectively?).</li>
+                  </ul>
+                </li>
+                <li>Founders can pull four levers (the 4Ps) to move between levels:
+                  <ul class="list-disc pl-4 space-y-3 mt-2">
+                    <li><span class="font-semibold bg-yellow-300 bg-opacity-25 px-1"><i class="fa-regular text-lg fa-user"></i>&nbsp;Persona</span> (target user),
+                      <li><span class="font-semibold bg-yellow-300 bg-opacity-25 px-1"><i class="fa-regular fa-square-exclamation"></i>&nbsp;Problem</span> (the urgent issue being solved),
+                        <li><span class="font-semibold bg-yellow-300 bg-opacity-25 px-1"><i class="fa-regular fa-handshake-simple"></i>&nbsp;Promise</span> (value proposition),
+                          <li><span class="font-semibold bg-yellow-300 bg-opacity-25 px-1"><i class="fa-regular fa-box-open-full"></i>&nbsp;and Product</span> (the actual solution).</li>
+                        </ul>
+                      </li>
+                      <li><strong class="bg-red-300 bg-opacity-50 px-1">Level 1 (Nascent)</strong> involves finding a small set of customers with a pressing problem and proving the product can solve it, usually with highly manual tactics and little repeatability.</li>
+                      <li><strong class="bg-orange-300 bg-opacity-50 px-1">Level 2 (Developing)</strong> requires more repeatable sales and ongoing customer satisfaction, while still accepting less-efficient onboarding and sales processes.</li>
+                      <li><strong class="bg-yellow-300 bg-opacity-50 px-1">Level 3 (Strong)</strong> is marked by rising inbound interest, significant growth in revenue and customers, plus better efficiency metrics (like payback period and gross margin).</li>
+                      <li><strong class="bg-green-300 bg-opacity-50 px-1">Level 4 (Extreme)</strong> describes widespread demand, high retention, strong unit economics, and a consistent playbook for acquiring and satisfying new customers—putting the startup in position to expand markets or launch new products.</li>
+                      <li>The overall goal is to reduce trial-and-error in finding product-market fit, offering benchmarks, case studies, and repeatable models so that founders can diagnose their stage and apply proven tactics to move forward.</li>
+                      <li>Once a company attains strong or extreme product-market fit for a single product, it typically repeats the journey with new products or markets to sustain growth over the long term.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="paper kalam-regular shadow rounded w-full">
+              <div class="pattern p-4 pl-14">
+                <div class="flex flex-col space-y-4 leading-snug  w-full">
+                  <div>
+                    <a href="https://www.ycombinator.com/library/95-default-alive-or-default-dead?carousel=Essays%20by%20Paul%20Graham" class="text-2xl pb-2 underline">Default Alive or Default Dead <i
+                      class="fa-regular text-lg fa-link"></i></a>
+                    <div class="p-4 bg-yellow-500 bg-opacity-25 my-4 border-2 border-yellow-400 rounded">
+                      <p><strong>TL;DR:</strong> Know if your startup is default alive (profitability on current funds) or default dead (needs more funding). Avoid overhiring, focus on improving the product, and always have a backup plan if funding falls through.</p>
+                    </div>
+                    <ul class="space-y-4 mt-2">
+                      <li>
+                        <ul class="list-disc pl-5 space-y-4 mt-2">
+                          <li><strong>Default Alive</strong>: A startup will reach profitability without needing more funding if expenses and revenue growth stay constant.</li>
+                          <li><strong>Default Dead</strong>: A startup will run out of money before reaching profitability unless it secures more funding.</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <h4 class="underline text-xl pt-4">Startups Must Know Their Status:</h4>
+                        <ul class="list-disc pl-5 space-y-4 mt-2">
+                          <li>Many founders fail to evaluate whether they are default alive or default dead, often due to inexperience or overconfidence in raising additional funds.</li>
+                          <li>Trevor Blackwell’s calculator can help determine the status.</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <h4 class="underline text-xl pt-4">Importance of Early Evaluation</h4>
+                        <ul class="list-disc pl-5 space-y-4 mt-2">
+                          <li>It’s better to ask this question too early than too late to avoid a &quot;fatal pinch&quot; (default dead + slow growth + insufficient time to fix it).</li>
+                          <li>Separating facts from hopes prevents complacency based on vague optimism about future funding.</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <h4 class="underline text-xl pt-4">Plan A vs. Plan B</h4>
+                        <ul class="list-disc pl-5 space-y-4 mt-2">
+                          <li>Relying solely on investors to save a default-dead startup is risky, even with high growth.</li>
+                          <li>Founders should always have a survival strategy (Plan B) if fundraising fails, including knowing when to implement it.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <h4 class="underline text-xl pt-4">Key Factors and Recommendations:</h4>
+                    <ul class="list-disc pl-5 space-y-4 mt-2">
+                      <li>
+                        <p><strong>Avoid Overhiring</strong>:</p>
+                        <ul class="list-disc pl-5 space-y-4 mt-2">
+                          <li>Hiring too quickly is the leading cause of startup failures after raising money.</li>
+                          <li>Overhiring doesn't solve slow growth caused by a product that isn't appealing enough.</li>
+                          <li>Growth typically comes from evolving the product or doing non-scalable, founder-driven work, not from expanding the team.</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p><strong>Growth vs. Spending</strong>:</p>
+                        <ul class="list-disc pl-5 space-y-4 mt-2">
+                          <li>Fast growth is often driven by hitting a significant market need, not by high spending.</li>
+                          <li>Wasteful spending can make a startup less attractive to investors if growth doesn’t materialise.</li>
+                        </ul>
+                      </li>
+                      <li>
+                        <p><strong>Learn from Successful Startups</strong>:</p>
+                        <ul class="list-disc pl-5 space-y-4 mt-2">
+                          <li>Examples like Airbnb show that focusing on product evolution before scaling can lead to greater long-term success.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <h4 class="underline text-xl pt-4">Common Startup Failure Patterns:</h4>
+                    <ol class="list-decimal pl-5 space-y-1 mt-2">
+                      <li>Develop a moderately appealing product with decent growth.</li>
+                      <li>Raise money, overhire, and expect growth to improve.</li>
+                      <li>Fail to achieve significant growth due to an underwhelming product.</li>
+                      <li>Run out of runway, become unappealing to investors, and collapse.</li>
+                    </ol>
+                    <h4 class="underline text-xl pt-4">Actionable Advice:</h4>
+                    <ul class="list-disc pl-5 space-y-1 mt-2 pb-4">
+                      <li>Focus on improving product appeal before scaling.</li>
+                      <li>Use early warning signals like the default alive/dead status to avoid poor decisions.</li>
+                      <li>Resist the urge to overhire and instead prioritise thoughtful growth strategies.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="paper kalam-regular shadow rounded w-full">
+              <div class="pattern p-4 pl-14">
+                <div class="flex flex-col space-y-4 leading-snug  w-full">
+                  <div>
+                    <a href="https://www.ycombinator.com/library/94-be-relentlessly-resourceful?carousel=Essays%20by%20Paul%20Graham" class="text-2xl pb-2 underline">Be relentlessly resourceful <i
+                      class="fa-regular text-lg fa-link"></i></a>
+                    <div class="p-4 bg-yellow-500 bg-opacity-25 my-4 border-2 border-yellow-400 rounded">
+                      <p><strong>TL;DR</strong>: “Make something people want” is the goal; “Be relentlessly resourceful” is the approach.</p>
+                    </div>
+                    <ul class="space-y-4 mt-2">
+                      <li><strong>Core Idea</strong>: A successful startup founder is best described as <em>relentlessly resourceful</em>, combining persistence with creativity in overcoming obstacles.</li>
+                      <li><strong>Opposite Quality</strong>: The term <em>hapless</em> captures a passive response to challenges—letting external forces dictate the outcome rather than taking control.</li>
+                      <li><strong>Why “Relentlessly Resourceful”?</strong>
+                        <ul class="list-disc pl-4 space-y-4 mt-2">
+                          <li>Merely being relentless isn’t enough when facing new and unknown barriers.</li>
+                          <li>Adapting quickly and finding fresh solutions is crucial to progress.</li>
+                        </ul>
+                      </li>
+                      <li><strong>Teachability</strong>:
+                        <ul class="list-disc pl-4 space-y-4 mt-2">
+                          <li>While not everyone can acquire it, many can learn or develop this trait, especially if they’ve been used to following authority and just need encouragement to take initiative.</li>
+                        </ul>
+                      </li>
+                      <li><strong>Limit on Startups?</strong>:
+                        <ul class="list-disc pl-4 space-y-4 mt-2">
+                          <li>There’s no fixed upper bound on the number of successful startups; consumer demand isn’t capped.</li>
+                          <li>The real limit is how many founders possess—or can cultivate—this quality.</li>
+                        </ul>
+                      </li>
+                      <li><strong>Practical Guideline</strong>:
+                        <ul class="list-disc pl-4 space-y-4 mt-2">
+                          <li>If you want to assess if you or a potential cofounder might do well with a startup, ask whether you’re <em>relentlessly resourceful</em>.</li>
+                          <li>Tape the phrase to your mirror as a reminder: “Make something people want” is the goal; “Be relentlessly resourceful” is the way to get there.</li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <div class="flex w-full justify-center">
+                      <div class="rotate-1 max-w-fit my-16 text-xl p-4 bg-green-500 bg-opacity-50 shadow-lg text-green-900">
+                        <ul>
+                          <li><strong>Marcus on the "How relentlessly resourceful" </strong>
+                            <ul class="mt-2 divide-y divide-green-700 divide-opacity-25">
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Embrace a Problem-Solving Mindset</li>
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Act Quickly and Iteratively</li>
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Be Creative with Limited Resources</li>
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Develop Resilience</li>
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Network Relentlessly</li>
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Learn New Skills on the Fly</li>
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Keep Experimenting</li>
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Cultivate Self-Reliance</li>
+                              <li><i class="fa-solid fa-check opacity-70"></i>&nbsp;Take Calculated Risks</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        document.querySelectorAll('td').forEach(td => {
+          td.classList.add('py-2', 'pr-4'); // Add Tailwind padding class
+        });
+      </script>
+    </body>
+  </html>
