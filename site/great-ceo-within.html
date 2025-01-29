@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>The Great CEO Within - Comprehensive Bullet Points | Marcus Schappi</title>
+    <script src="https://kit.fontawesome.com/2d5a909a29.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://livejs.com/live.js"></script>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      .kalam-light {
+        font-family: "Kalam", cursive;
+        font-weight: 300;
+        font-style: normal;
+      }
+
+      .kalam-regular {
+        font-family: "Kalam", cursive;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      .kalam-bold {
+        font-family: "Kalam", cursive;
+        font-weight: 700;
+        font-style: normal;
+      }
+
+      /* styling paper */
+      .paper {
+        position: relative;
+        margin: 20px auto;
+
+        background-color: #fefce8;
+        color: #451a03;
+      }
+
+      /* styling red vertical line */
+      .paper::before {
+        content: '';
+        width: 2px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 40px;
+        background-color: rgba(255, 0, 0, 0.2);
+      }
+
+      .expansion{
+        background-color: greenyellow;
+
+      }
+
+
+      /* styling blue horizontal lines */
+      .pattern {
+        height: 100%;
+        background-image: repeating-linear-gradient(#fefce8 0px, #fefce8 24px, rgba(251, 191, 36, 0.2) 25px);
+      }
+
+      .pattern.expansion{
+        background-image: repeating-linear-gradient(greenyellow 0px, greenyellow 24px, rgba(251, 191, 36, 0.2) 25px);
+      }
+
+      td ul li {
+        padding-bottom: 1rem;
+      }
+
+      /* styling text content */
+    </style>
+    <script>
+      function valuationCalculator() {
+        return {
+          investment: 0,
+          valuation: 0,
+          isPreMoney: true,
+          result: '',
+          ownershipPercentage: 0,
+          calculateOwnership() {
+            console.log(this.isPreMoney, this.investment, this.valuation)
+            let investment = parseFloat(this.investment);
+            let valuation = parseFloat(this.valuation);
+            if (isNaN(investment) || isNaN(valuation) || investment <= 0 || valuation <= 0) {
+              this.result = "Invalid input. Please enter positive numbers.";
+              this.ownershipPercentage = 0;
+              return;
+            }
+            if (this.isPreMoney) {
+              // Calculate Post-Money Valuation
+              let postMoneyValuation = valuation + investment;
+              this.result = `Post-Money Valuation: $${postMoneyValuation.toFixed(2)} million`;
+              this.ownershipPercentage = (investment / postMoneyValuation * 100).toFixed(2);
+            } else {
+              // Calculate Pre-Money Valuation
+              let preMoneyValuation = valuation - investment;
+              if (preMoneyValuation < 0) {
+                this.result = "Investment cannot be greater than the post-money valuation.";
+                this.ownershipPercentage = 0;
+                return;
+              }
+              this.result = `Pre-Money Valuation: $${preMoneyValuation.toFixed(2)} million`;
+              this.ownershipPercentage = (investment / preMoneyValuation * 100).toFixed(2);
+            }
+          },
+        };
+      }
+    </script>
+  </head>
+  <body>
+  <div class="flex justify-center p-4 lg:p-16 text-lg">
+    <div class="w-full max-w-prose flex flex-col space-y-8">
+      <!-- Back Home Link -->
+      <div>
+        <a class="text-blue-600 underline" href="/">← Back Home</a>
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="text-4xl font-black text-center">The Great CEO Within - Comprehensive Bullet Points</h1>
+
+      <!-- PART I: THE BEGINNING -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+              <div class="p-4 bg-yellow-500 bg-opacity-25 my-4 border-2 border-yellow-400 rounded">
+               <p>This is a summary of the awesome book <a href="https://www.amazon.com.au/dp/B07ZLGQZYC"   target="_blank" class="text-blue-600 underline">The Great CEO Within</a> by <a href="https://mocharymethod.com/"   target="_blank" class="text-blue-600 underline">Matt Mochary</a>.
+                   You can <a href="https://docs.google.com/document/d/1ZJZbv4J6FZ8Dnb0JuMhJxTnwl-dwqx5xl0s65DE3wO8/edit?tab=t.0#heading=h.wurvunk0u667"  target="_blank" class="text-blue-600 underline">read it for free in this Google Doc</a>, however I highly recommend <a href="https://www.amazon.com.au/dp/B07ZLGQZYC"  target="_blank" class="text-blue-600 underline">purchasing the book from Amazon too</a>!</p>
+             </div>
+
+
+            <h2 class="text-3xl font-bold">Part I – The Beginning</h2>
+
+            <!-- Chapter 1 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 1: Getting Started</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Build around <strong class="bg-green-300 bg-opacity-50 px-1">real customers and real problems</strong>. Focus on genuine needs.</li>
+                <li>
+                  <strong>Disciplined Entrepreneurship (<a href="https://www.d-eship.com/"  target="_blank" class="text-blue-600 underline">Bill Aulet</a>)</strong>:
+                  <ul class="list-disc pl-6 space-y-1 mt-1">
+                    <li>If <em>not</em> at product-market fit, read and <a href="https://www.d-eship.com/"  target="_blank" class="text-blue-600 underline">apply its step-by-step framework</a>.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Chapter 2 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 2: The Team</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>
+                  <strong>Co-Founders</strong>:
+                  <ul class="list-disc pl-6 space-y-1 mt-1">
+                    <li>Avoid solo founding if possible (burnout risk).</li>
+                    <li>Seek complementary skills; share emotional load.</li>
+                    <li>Don’t do 50/50 splits (deadlock issues).</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Team Size Pre-PMF</strong>:
+                  <ul class="list-disc pl-6 space-y-1 mt-1">
+                    <li>Keep under ~6 people until real PMF (<span class="bg-pink-500 bg-opacity-25 px-1">> $1M ARR for B2B</span>).</li>
+                    <li>More people → complexity → morale + communication problems.</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Product-Market Fit (PMF)</strong>:
+                  <ul class="list-disc pl-6 space-y-1 mt-1">
+                    <li>Look for real usage, renewals, NPS, etc.—not just test budgets.</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Scaling</strong>:
+                  <ul class="list-disc pl-6 space-y-1 mt-1">
+                    <li>Scale aggressively only after proven PMF.</li>
+                    <li>Formal management system needed ~15–20 employees.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END PART I -->
+
+      <!-- PART II: INDIVIDUAL HABITS -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+            <h2 class="text-3xl font-bold">Part II – Individual Habits</h2>
+
+            <!-- Chapter 3: GTD -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 3: Getting Things Done (GTD)</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Process all inboxes daily. <span class="bg-yellow-200 px-1">If <2 mins, do it now</span>; else capture in Next Actions.</li>
+                <li>
+                  <strong class="bg-green-300 px-1 bg-opacity-75">GTD Lists</strong>:
+                  <ul class="list-disc pl-6 space-y-1 mt-1">
+                    <li>Next Actions, Waiting For, Someday/Maybe, Agenda, Projects, Review, Goals.</li>
+                    <li>Review daily or weekly depending on the list.</li>
+                  </ul>
+                </li>
+                <li>Use a suitable tool (<a href="https://www.omnigroup.com/omnifocus/" target="_blank" class="text-blue-600 underline">Omnifocus</a>, <a href="https://evernote.com/" target="_blank" class="text-blue-600 underline">Evernote</a>, etc.) for tracking.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 4: Inbox Zero -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 4: Inbox Zero</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Batch email checks vs. constant checking.</li>
+                <li>Process thoroughly each session → keep inbox empty or near-empty.</li>
+                <li>Use <a href="https://klinger.io/posts/how-to-use-gmail-more-efficiently" class="underline text-blue-600" target="_balnk">Andreas Klinger’s Gmail GTD approach</a> or similar systems.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 5: Top Goal -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 5: Top Goal</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Block 2 hours daily for your #1 priority, ideally early morning.</li>
+                <li>No interruptions—email/Slack off. Start with 30 mins if 2 hrs is tough.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 6: On Time and Present -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 6: On Time and Present</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Never be late without warning. Respect others’ time.</li>
+                <li>Leave 5–10 mins buffer between meetings to reset and prepare.</li>
+                <li>Stay off devices in meetings for full focus.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 7: When You Say It Twice, Write It Down -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 7: When You Say It Twice, Write It Down</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>If you repeat the same information, document it—save future time.</li>
+                <li>Put repeated instructions/FAQs in a wiki or shared doc.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 8: Gratitude & Appreciation -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 8: Gratitude and Appreciation</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Ask “What am I grateful for?” daily (5 specific items).</li>
+                <li>Openly appreciate colleagues—be specific with thanks.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 9: Energy Audit & Zone of Genius -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 9: Energy Audit and Zone of Genius</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>
+                  <strong class="bg-blue-300 bg-opacity-50 px-1">Energy Audit</strong>:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>Mark last week’s calendar green (energising) or red (draining).</li>
+                    <li>Aim for 75% green tasks—delegate the rest.</li>
+                  </ul>
+                </li>
+                <li>
+                  <strong class="bg-purple-300 bg-opacity-50 px-1">Zone of Genius</strong>:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>Spend most time on tasks you excel at and enjoy (Unique Ability).</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Chapter 10: Health -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 10: Health</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Exercise multiple times per week; daily is ideal.</li>
+                <li>Get therapy or join a CEO support group for mental well-being.</li>
+                <li>Meditation (10–15 mins daily) helps focus/calm the mind.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END PART II -->
+
+      <!-- PART III: GROUP HABITS -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+            <h2 class="text-3xl font-bold">Part III – Group Habits</h2>
+
+            <!-- Chapter 11: Decision-Making -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 11: Decision-Making</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Pre-write proposals to save group time (Bezos-style doc reading). </li>
+                <li>Choose decision method based on needed buy-in:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>Manager decides (low buy-in) → Quick but minimal consensus.</li>
+                    <li>Manager w/ straw man → More input, moderate buy-in.</li>
+                    <li>Full group consensus → Max buy-in, slowest.</li>
+                  </ul>
+                </li>
+                <li><strong class="bg-indigo-300 bg-opacity-50 px-2">RAPID</strong> framework for complex decisions:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>Recommend, Agree, Perform, Input, Decide.</li>
+                    <li>Type 1 (irreversible) vs. Type 2 (reversible) decisions.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Chapter 12: Loudest Voice in the Room -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 12: Loudest Voice in the Room</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>CEO’s stance can overshadow. Let others speak first or vote before CEO shares opinion.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 13: Impeccable Agreements -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 13: Impeccable Agreements and Consequences</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Agreements must be precise and usually in writing.</li>
+                <li>If you can’t honour an agreement, alert others ASAP.</li>
+                <li>Repeat breaks → possible termination (culture demands accountability).</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 14: Transparency -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 14: Transparency</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Share both positives and negatives openly with the team.</li>
+                <li>Keep only compensation/Performance Improvement Plans private (unless you adopt radical transparency fully).</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 15: Conflict Resolution -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 15: Conflict Resolution & Issue Identification</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li><strong>Conflict</strong>: have each party write down their Anger/Fear/Sadness/Joy/Excitement about the other. Share + clarify until fully heard.</li>
+                <li><strong>Issues</strong>: <span class="bg-teal-200 px-2">“If you were CEO, what 3 issues would you solve?”</span> plus an emotional deep-dive (Anger/Fear… about the company) to surface core problems.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 16: Conscious Leadership -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 16: Conscious Leadership</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Operate “above the line”: be open and curious, not defensive.</li>
+                <li>Take 100% responsibility; no blame/shame.</li>
+                <li>Practise daily techniques from <em>The 15 Commitments of Conscious Leadership</em>.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 17: Customer Obsession -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 17: Customer Obsession</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Deeply empathise with real users—sit with them, watch usage, gather pain points.</li>
+                <li>Train engineers/teams to be as close to the customer as possible (no silos).</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 18: Culture -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 18: Culture</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li><strong>Values</strong>: discover them collaboratively. Use them in hiring/firing.</li>
+                <li><strong>Fun & Celebration</strong>: scheduled events, highlight achievements, keep it light.</li>
+                <li><strong>Working Hours</strong>: focus on results. Core hours for real-time collab. Provide perks like meals if feasible.</li>
+                <li>No <strong>politics</strong>: no lobbying for raises—use standard policies. Avoid sowing resentment.</li>
+                <li>If conflict emerges, don’t let it devolve into “Lord of the Flies.” Intervene with structured feedback/facilitation.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END PART III -->
+
+      <!-- PART IV: INFRASTRUCTURE -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+            <h2 class="text-3xl font-bold">Part IV – Infrastructure</h2>
+
+            <!-- Chapter 19 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 19: Company Folder System & Wiki</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Use a structured folder (e.g., Google Drive). Each dept has a folder. Restrict only comp/performance reviews if needed.</li>
+                <li>Maintain a wiki (Notion or similar) with all key docs and processes for easy onboarding.</li>
+                <li>Write down processes as soon as you do them twice; add to wiki.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 20 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 20: Goal-Tracking Tools</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Individual tasks: <a href="https://www.omnigroup.com/omnifocus/" target="_blank" class="text-blue-600 underline">Omnifocus</a>, <a href="https://culturedcode.com/things/" target="_blank" class="text-blue-600 underline">Things</a>, <a href="https://evernote.com/" target="_blank" class="text-blue-600 underline">Evernote</a>, etc.</li>
+                <li>Group tasks: <a href="https://asana.com/" target="_blank" class="text-blue-600 underline">Asana</a>, <a href="https://trello.com/" target="_blank" class="text-blue-600 underline">Trello</a>. OKRs: <a href="https://lattice.com/"  target="_blank" class="text-blue-600 underline">Lattice</a>, <a href="https://www.15five.com/"  target="_blank" class="text-blue-600 underline">15Five</a>, or Google Sheets for smaller teams.</li>
+                <li>Avoid overloading the team—use group tools sparingly for tasks needing group visibility.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 21 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 21: Areas of Responsibility (AORs)</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Each function has exactly one DRI (Directly Responsible Individual).</li>
+                <li>Avoid shared ownership to prevent tasks slipping.</li>
+                <li>Keep an up-to-date AOR doc with owners + backups.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 22 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 22: No Single Point of Failure</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Document processes so knowledge isn’t locked in one person.</li>
+                <li>Cross-train a backup for each key role.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 23 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 23: Key Performance Indicators (KPIs)</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Measure the big 5–6 metrics that matter across the company (e.g. MRR, renewals).</li>
+                <li>Use a dashboard (<a href="https://www.geckoboard.com/" target="_blank" class="text-blue-600 underline">Geckoboard</a>, chart displays, etc.).</li>
+                <li>Include counter-metrics to give context (avoiding easy-but-low-value tasks). </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END PART IV -->
+
+      <!-- PART V: COLLABORATION -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+            <h2 class="text-3xl font-bold">Part V – Collaboration</h2>
+
+            <!-- Chapter 24 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 24: Meetings</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>ACT: Accountability, Coaching, Transparency at every level (company, dept, team, individual).</li>
+                <li>Meeting types:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>1-on-1s, Team Meeting, All-Hands, Office Hours, Social Events, Quarterly Offsites.</li>
+                  </ul>
+                </li>
+                <li>One full “internal meeting day” per week for managers. Another for external if needed. 3 days for “maker time.”</li>
+                <li><strong>One-on-ones</strong>: weekly/bi-weekly, focus on actions, coaching, and feedback (both ways).</li>
+                <li><strong>Team meetings</strong>: pre-written updates to save time; turn unresolved issues into RAPIDs.</li>
+                <li><strong>Quarterly Offsites</strong>: reflect on last quarter, set new OKRs, build relationships.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 25 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 25: Feedback</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li><strong>Receiving</strong>: ask for it explicitly, acknowledge it, decide if you accept, take action, and show appreciation.</li>
+                <li><strong>Giving</strong>:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>Ask permission, state the fact, the feeling, the story, then a request.</li>
+                    <li>2-way methods (video/in-person) so you see real-time reactions.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Chapter 26 -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 26: Organisational Structure</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Identify a CEO clearly once you’re beyond the micro-stage (~6+ people).</li>
+                <li>Dept heads: typical are Product, Engineering, Sales, Marketing, CS, Ops.</li>
+                <li>Keep the leadership team small (6–10 max). Org charts must be public/clear.</li>
+                <li>Avoid fancy titles too early—stick to “Head of X” to keep agility.</li>
+                <li>Re-org no more than every 3–6 months; communicate thoroughly.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END PART V -->
+
+      <!-- PART VI: PROCESSES -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+            <h2 class="text-3xl font-bold">Part VI – Processes</h2>
+
+            <!-- Chapter 27: Fundraising -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 27: Fundraising</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Partner choice > firm brand. Work with the right individual partner.</li>
+                <li>Triangulation Method for intros: multiple folks simultaneously praising you to the investor.</li>
+                <li>Two styles:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>Traditional pitch deck vs. Relationship approach (build trust personally first).</li>
+                  </ul>
+                </li>
+                <li>Check your inflection points—raise right after hitting big milestones.</li>
+                <li><strong>SAFEs</strong> vs. priced equity: cheaper to do a SAFE if < $2–5M raise. Larger = priced round.</li>
+                <li><strong>Voting Shares</strong>: consider multiple classes for founder control.</li>
+                <li>Keep legal fees down with a single 4–8 hour meeting including decision-makers + lawyers.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 28: Recruiting -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 28: Recruiting</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Hire only A-players:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>Scorecard (Outcomes + Competencies), Sourcing, Structured Interviews (Screen, Topgrading), References, Selling the role.</li>
+                  </ul>
+                </li>
+                <li>Offer: present multiple cash–equity combos so they can choose. </li>
+                <li><strong>Onboarding</strong>: buddy system, thorough process documentation, 90-day roadmap.</li>
+                <li><strong>Firing</strong>: If performance doesn’t improve, do a documented PIP or let them go kindly but firmly. Help them land well.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 29: Sales -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 29: Sales</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li><strong>3 steps</strong> to close:
+                  <ul class="list-disc pl-6 mt-1">
+                    <li>Build trust</li>
+                    <li>Identify specific pain (ask right questions)</li>
+                    <li>Sell results, not features</li>
+                  </ul>
+                </li>
+                <li>Don’t oversell or overpromise. Maintain integrity.</li>
+                <li><strong>Team structure</strong>: SDR (Qualify), AE (Close), CS (Retain). </li>
+                <li>Leads: Seeds (word-of-mouth), Nets (marketing), Spears (outbound). Track metrics like cost per lead, churn, MRR growth.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 30: Marketing -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 30: Marketing</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Strategic marketing: define your <strong>target beachhead</strong>; solve a top pain for a specific segment first.</li>
+                <li>Achieve PMF before pouring money into marketing. Early marketing is about validating the solution.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END PART VI -->
+
+      <!-- PART VII: OTHER DEPARTMENTS -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+            <h2 class="text-3xl font-bold">Part VII – Other Departments</h2>
+
+            <!-- Chapter 31: Executive -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 31: Executive</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li><strong>Chief of Staff</strong>: extension of CEO for organising, anticipating needs—often ex-consultant background. Provide full access to everything so they learn quickly.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 32: Product -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 32: Product</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>PM must interact heavily with customers + know dev constraints. They facilitate feature priority and specs. </li>
+                <li>Keep Product separate from Engineering org so priorities aren’t engineering-skewed.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 33: Engineering -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 33: Engineering</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Hire a strong manager to run the team (especially from a well-managed big tech company).</li>
+                <li>Use a system like JIRA once 10+ engineers. A small team of top engineers often outperforms bigger but average teams.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 34: HR -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 34: Human Resources</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Use a PEO (TriNet, Sequoia One) while small to manage payroll, compliance, benefits easily.</li>
+                <li>Transition to in-house HR around ~100–150 employees.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 35: Finance -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 35: Finance</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Outsource CFO or top accountant early for monthly financial statements, projections, cost control.</li>
+                <li>Keep finances straightforward, watch runway carefully.</li>
+              </ul>
+            </div>
+
+            <!-- Chapter 36: Legal -->
+            <div>
+              <h3 class="font-bold text-2xl">Chapter 36: Legal</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Use top-tier firm (Cooley, Wilson Sonsini, etc.) for major rounds; smaller specialized counsel for day-to-day.</li>
+                <li>Negotiate fees/time by doing a single “all in one room/call” session if possible.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END PART VII -->
+
+      <!-- PART VIII: APPENDICES -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+            <h2 class="text-3xl font-bold">Part VIII – Appendices</h2>
+
+            <div>
+              <h3 class="font-bold text-2xl">Appendix A: Summary of Conscious Leadership</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>“Above the line” = open/curious; “Below the line” = defensive/wanting to be right.</li>
+                <li>Take radical responsibility. Don’t blame external factors; change starts with you.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-2xl">Appendix B: The Challenge of the Technical Founder</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li><strong>Embrace sales</strong>: early engineering founders often dislike it, but it’s critical for trust/revenue.</li>
+                <li><strong>Customer success</strong>: not everyone is equally technical; support them thoroughly.</li>
+                <li><strong>Leaving coding</strong>: at some point, the founder/CEO must delegate engineering tasks to scale the business side.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-2xl">Appendix C: Recruiting Process</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Structured steps: Scorecard → Source → Select (Interviews: Screen, Topgrading, Focused, References) → Sell → Onboard.</li>
+                <li>Topgrading interview checks each previous job: hired to do what, accomplishments, mistakes, bosses, reason for leaving.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-2xl">Appendix D: Sample AOR List</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Shows departmental splits (Exec, Dev, Product, Sales, Marketing, Finance) with direct owners for each function + backups.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-2xl">Appendix E: Board of Directors</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Keep board small (3 or 5 seats) for quick decisions. Avoid even-number seats.</li>
+                <li>Provide thorough pre-reads so board has minimal Q&A. Summarise decisions effectively.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-2xl">Appendix F: To IPO or Not to IPO?</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li>Public listing → huge compliance overhead, quarterly pressures, short-seller risks.</li>
+                <li>Private markets often have ample capital; weigh lost flexibility vs. liquidity benefits.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-2xl">Appendix G: Personal</h3>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li><strong>Sleep</strong>: identify light/deep cycles, use GTD to calm mind, don’t panic if you wake up—just use or read quietly.</li>
+                <li><strong>Liquidity</strong>: aim for $10–100M personal liquidity if your company’s stock is surging, to diversify.</li>
+                <li><strong>Invest</strong>: store in a brokerage (e.g., Schwab), invest in low-cost index funds, re-balance periodically (<a href="https://www.amazon.com/Unconventional-Success-Fundamental-Approach-Investment/dp/0743228383">Swensen’s approach</a>).</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END PART VIII -->
+
+      <!-- FINAL NOTE -->
+      <div class="paper kalam-regular shadow rounded w-full">
+        <div class="pattern p-4 pl-14">
+          <div class="flex flex-col space-y-4 leading-snug w-full">
+            <div>
+              <h2 class="font-bold text-2xl">Key Overall Principles</h2>
+              <ul class="list-disc pl-4 space-y-2 mt-2 mb-4">
+                <li><strong>Stay Lean Pre-PMF</strong>: Small teams pivot faster, burn less cash.</li>
+                <li><strong>Document & Systematise</strong>: Written processes + wiki + stable meeting cadences.</li>
+                <li><strong>Foster Transparency & Feedback</strong>: Encourage open dialogue and accountability.</li>
+                <li><strong>Customer-Centric & Empathetic</strong>: Everything from sales to engineering stems from real user pain.</li>
+                <li><strong>Scale Only When Ready</strong>: Put robust systems in place once you surpass ~15–20 employees.</li>
+              </ul>
+              <p><strong>By consistently applying these frameworks, you’ll build a high-functioning organisation that grows sustainably while retaining a positive, transparent culture.</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('td').forEach(td => {
+      td.classList.add('py-2', 'pr-4');
+    });
+  </script>
+  </body>
+</html>
