@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cloud Credits for Australian Startups | Marcus Schappi</title>
+
+        <!-- React and ReactDOM -->
+        <script
+            crossorigin
+            src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"
+        ></script>
+        <script
+            crossorigin
+            src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"
+        ></script>
+
+        <!-- Babel for JSX -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <style>
+            /* Additional custom styles */
+            .provider-card:hover {
+                transform: translateY(-2px);
+                transition: transform 0.2s ease-in-out;
+            }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <div class="flex justify-center p-4 lg:p-16 text-lg">
+            <div>
+                <a class="text-blue-600 underline" href="/">← Back Home</a>
+            </div>
+            <div id="root"></div>
+        </div>
+
+        <script type="text/babel">
+            const CloudComparison = () => {
+                const [sortField, setSortField] = React.useState("name");
+                const [sortDirection, setSortDirection] = React.useState("asc");
+
+                const providers = [
+                    {
+                        name: "DigitalOcean Hatch",
+                        maxCredits: "12 months of credits",
+                        hasLocalDC: true,
+                        minFunding: "None",
+                        link: "digitalocean.com/hatch",
+                        aiSupport: false,
+                        keyBenefits:
+                            "Technical guidance, 24/7 priority support, community access",
+                        australianNotes: "Australian founders eligible",
+                    },
+                    {
+                        name: "Microsoft Founders Hub",
+                        maxCredits: "Up to US$150,000",
+                        hasLocalDC: true,
+                        minFunding: "None",
+                        link: "microsoft.com/en-us/startups",
+                        aiSupport: true,
+                        keyBenefits:
+                            "GPT-4 access, unlimited technical advisory, GitHub & Microsoft 365",
+                        australianNotes:
+                            "Multiple Australian DCs (Sydney, Melbourne), local support",
+                    },
+                    {
+                        name: "AWS Activate",
+                        maxCredits: "Up to US$100,000",
+                        hasLocalDC: true,
+                        minFunding: "Varies",
+                        link: "aws.amazon.com/activate/terms",
+                        aiSupport: true,
+                        keyBenefits:
+                            "Business support, mentorship, provider network access",
+                        australianNotes:
+                            "Multiple Australian regions, large local user groups",
+                    },
+                    {
+                        name: "Google Cloud Startups",
+                        maxCredits: "Up to US$350,000",
+                        hasLocalDC: true,
+                        minFunding: "Early-stage",
+                        link: "cloud.google.com/startup",
+                        aiSupport: true,
+                        keyBenefits:
+                            "AI/ML perks, technical training, business support",
+                        australianNotes: "Sydney DC, local developer relations",
+                    },
+                    {
+                        name: "NVIDIA Inception",
+                        maxCredits: "Hardware discounts",
+                        hasLocalDC: false,
+                        minFunding: "None",
+                        link: "nvidia.com/en-au/startups",
+                        aiSupport: true,
+                        keyBenefits:
+                            "GPU discounts, engineering guidance, VC exposure",
+                        australianNotes:
+                            "Supports AU AI/GPU startups with community access",
+                    },
+                    {
+                        name: "Vultr Startup Program",
+                        maxCredits: "Up to US$100,000",
+                        hasLocalDC: true,
+                        minFunding: "Series A",
+                        link: "discover.vultr.com/startup-program",
+                        aiSupport: false,
+                        keyBenefits:
+                            "Account management, architecture consulting, priority support",
+                        australianNotes: "Sydney DC available",
+                    },
+                ];
+
+                const handleSort = (field) => {
+                    if (sortField === field) {
+                        setSortDirection(
+                            sortDirection === "asc" ? "desc" : "asc",
+                        );
+                    } else {
+                        setSortField(field);
+                        setSortDirection("asc");
+                    }
+                };
+
+                const sortedProviders = [...providers].sort((a, b) => {
+                    if (sortDirection === "asc") {
+                        return a[sortField] > b[sortField] ? 1 : -1;
+                    }
+                    return a[sortField] < b[sortField] ? 1 : -1;
+                });
+
+                const SortIcon = () => (
+                    <svg
+                        className="w-4 h-4 ml-1 inline-block"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                    >
+                        <path d="M7 10l5 5 5-5" />
+                    </svg>
+                );
+
+                return (
+                    <div className="container mx-auto px-4 py-8 max-w-7xl">
+                        <h1 className="text-4xl font-bold text-center mb-8">
+                            Cloud Credits for Australian Startups
+                        </h1>
+
+                        {/* Main comparison table */}
+                        <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-8">
+                            <div className="overflow-x-auto">
+                                <table className="w-full">
+                                    <thead>
+                                        <tr className="bg-gray-50">
+                                            <th
+                                                className="px-6 py-4 text-left cursor-pointer hover:bg-gray-100"
+                                                onClick={() =>
+                                                    handleSort("name")
+                                                }
+                                            >
+                                                <div className="flex items-center">
+                                                    Provider <SortIcon />
+                                                </div>
+                                            </th>
+                                            <th
+                                                className="px-6 py-4 text-left cursor-pointer hover:bg-gray-100"
+                                                onClick={() =>
+                                                    handleSort("maxCredits")
+                                                }
+                                            >
+                                                <div className="flex items-center">
+                                                    Max Credits <SortIcon />
+                                                </div>
+                                            </th>
+                                            <th
+                                                className="px-6 py-4 text-left cursor-pointer hover:bg-gray-100"
+                                                onClick={() =>
+                                                    handleSort("hasLocalDC")
+                                                }
+                                            >
+                                                <div className="flex items-center">
+                                                    AU Data Center <SortIcon />
+                                                </div>
+                                            </th>
+                                            <th
+                                                className="px-6 py-4 text-left cursor-pointer hover:bg-gray-100"
+                                                onClick={() =>
+                                                    handleSort("minFunding")
+                                                }
+                                            >
+                                                <div className="flex items-center">
+                                                    Min. Funding <SortIcon />
+                                                </div>
+                                            </th>
+                                            <th
+                                                className="px-6 py-4 text-left cursor-pointer hover:bg-gray-100"
+                                                onClick={() =>
+                                                    handleSort("aiSupport")
+                                                }
+                                            >
+                                                <div className="flex items-center">
+                                                    AI Support <SortIcon />
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {sortedProviders.map(
+                                            (provider, index) => (
+                                                <tr
+                                                    key={provider.name}
+                                                    className={
+                                                        index % 2 === 0
+                                                            ? "bg-white"
+                                                            : "bg-gray-50"
+                                                    }
+                                                >
+                                                    <td className="px-6 py-4">
+                                                        <div className="font-semibold text-gray-900">
+                                                            {provider.name}
+                                                        </div>
+                                                        <a
+                                                            href={`https://${provider.link}`}
+                                                            className="text-sm text-blue-600 hover:underline"
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                        >
+                                                            {provider.link}
+                                                        </a>
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        {provider.maxCredits}
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        {provider.hasLocalDC
+                                                            ? "✅"
+                                                            : "❌"}
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        {provider.minFunding}
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        {provider.aiSupport
+                                                            ? "✅"
+                                                            : "❌"}
+                                                    </td>
+                                                </tr>
+                                            ),
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        {/* Detailed provider cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {sortedProviders.map((provider) => (
+                                <div
+                                    key={provider.name}
+                                    className="bg-white rounded-lg shadow-lg overflow-hidden provider-card"
+                                >
+                                    <div className="p-6">
+                                        <h3 className="text-xl font-bold mb-4">
+                                            {provider.name}
+                                        </h3>
+                                        <div className="space-y-4">
+                                            <div>
+                                                <h4 className="font-semibold text-gray-700 mb-2">
+                                                    Key Benefits
+                                                </h4>
+                                                <p className="text-gray-600">
+                                                    {provider.keyBenefits}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <h4 className="font-semibold text-gray-700 mb-2">
+                                                    Australian Notes
+                                                </h4>
+                                                <p className="text-gray-600">
+                                                    {provider.australianNotes}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+            };
+
+            // Render the app
+            const root = ReactDOM.createRoot(document.getElementById("root"));
+            root.render(<CloudComparison />);
+        </script>
+    </body>
+</html>
