@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HTML to Markdown Converter</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/turndown/7.1.2/turndown.min.js"></script>
+        <style>
+            body {
+                font-family:
+                    system-ui,
+                    -apple-system,
+                    sans-serif;
+                max-width: 800px;
+                margin: 2rem auto;
+                padding: 0 1rem;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            textarea {
+                width: 100%;
+                padding: 0.5rem;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                min-height: 200px;
+                font-family: monospace;
+                resize: vertical;
+                overflow-y: hidden;
+            }
+
+            #outputText {
+                height: auto;
+            }
+            button {
+                background: #0070f3;
+                color: white;
+                border: none;
+                padding: 0.5rem 1rem;
+                border-radius: 4px;
+                cursor: pointer;
+                max-width: fit-content;
+            }
+            button:disabled {
+                background: #ccc;
+            }
+            #error {
+                color: red;
+                margin-top: 1rem;
+            }
+            .loading {
+                display: none;
+                margin-top: 1rem;
+            }
+            .config-section {
+                background: #f5f5f5;
+                padding: 1rem;
+                border-radius: 4px;
+                margin: 1rem 0;
+            }
+            .config-row {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 1rem;
+            }
+            .config-row:last-child {
+                margin-bottom: 0;
+            }
+            .status {
+                font-size: 0.875rem;
+                color: #666;
+            }
+            .status.success {
+                color: #22c55e;
+            }
+            .hidden {
+                display: none;
+            }
+            .config-toggle {
+                color: #0070f3;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+            .config-toggle:hover {
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>HTML to Markdown Converter</h1>
+
+            <div id="configToggleContainer">
+                <span id="configToggle" class="config-toggle"
+                    >Show Configuration</span
+                >
+            </div>
+
+            <div id="configSection" class="config-section hidden">
+                <h2>Configuration</h2>
+                <div class="config-row">
+                    <label>
+                        <input type="checkbox" id="headingStyle" checked />
+                        Use ATX heading style (# instead of underlines)
+                    </label>
+                </div>
+                <div class="config-row">
+                    <label>
+                        <input type="checkbox" id="codeBlockStyle" checked />
+                        Use fenced code blocks (``` instead of indentation)
+                    </label>
+                </div>
+                <div class="config-row">
+                    <label>
+                        <input type="checkbox" id="emDelimiter" checked />
+                        Use asterisks for emphasis (* instead of _)
+                    </label>
+                </div>
+                <button id="saveConfig">Save Configuration</button>
+                <div id="configStatus" class="status"></div>
+            </div>
+
+            <p>Enter HTML to convert to Markdown:</p>
+            <textarea
+                id="inputText"
+                placeholder="Enter HTML here..."
+            ></textarea>
+
+            <div>
+                <button id="convertBtn">Convert to Markdown</button>
+            </div>
+
+            <p>Converted Markdown:</p>
+            <textarea id="outputText" readonly></textarea>
+
+            <div class="loading" id="loading">Converting...</div>
+            <div id="error"></div>
+        </div>
+
+        <script>
+            const CONFIG_KEY = "markdown_converter_config";
+
+            function toggleConfig() {
+                const configSection = document.getElementById("configSection");
+                const configToggle = document.getElementById("configToggle");
+                const isHidden = configSection.classList.contains("hidden");
+
+                configSection.classList.toggle("hidden");
+                configToggle.textContent = isHidden
+                    ? "Hide Configuration"
+                    : "Show Configuration";
+            }
+
+            function loadConfig() {
+                const config = localStorage.getItem(CONFIG_KEY);
+                if (config) {
+                    const { headingStyle, codeBlockStyle, emDelimiter } =
+                        JSON.parse(config);
+                    document.getElementById("headingStyle").checked =
+                        headingStyle;
+                    document.getElementById("codeBlockStyle").checked =
+                        codeBlockStyle;
+                    document.getElementById("emDelimiter").checked =
+                        emDelimiter;
+                    document
+                        .getElementById("configSection")
+                        .classList.add("hidden");
+                    document.getElementById("configToggle").textContent =
+                        "Show Configuration";
+                    updateConfigStatus("Configuration loaded", true);
+                }
+            }
+
+            function saveConfig() {
+                const config = {
+                    headingStyle:
+                        document.getElementById("headingStyle").checked,
+                    codeBlockStyle:
+                        document.getElementById("codeBlockStyle").checked,
+                    emDelimiter: document.getElementById("emDelimiter").checked,
+                };
+                localStorage.setItem(CONFIG_KEY, JSON.stringify(config));
+                updateConfigStatus("Configuration saved successfully", true);
+
+                document
+                    .getElementById("configSection")
+                    .classList.add("hidden");
+                document.getElementById("configToggle").textContent =
+                    "Show Configuration";
+            }
+
+            function updateConfigStatus(message, isSuccess = false) {
+                const status = document.getElementById("configStatus");
+                status.textContent = message;
+                status.className = `status ${isSuccess ? "success" : ""}`;
+            }
+
+            function convertToMarkdown() {
+                const inputText = document.getElementById("inputText").value;
+                const outputText = document.getElementById("outputText");
+                const button = document.getElementById("convertBtn");
+                const loading = document.getElementById("loading");
+                const error = document.getElementById("error");
+
+                if (!inputText.trim()) {
+                    error.textContent = "Please enter some HTML";
+                    return;
+                }
+
+                button.disabled = true;
+                loading.style.display = "block";
+                error.textContent = "";
+
+                try {
+                    const config = localStorage.getItem(CONFIG_KEY);
+                    const { headingStyle, codeBlockStyle, emDelimiter } = config
+                        ? JSON.parse(config)
+                        : {
+                              headingStyle: true,
+                              codeBlockStyle: true,
+                              emDelimiter: true,
+                          };
+
+                    const turndownService = new TurndownService({
+                        headingStyle: headingStyle ? "atx" : "setext",
+                        codeBlockStyle: codeBlockStyle ? "fenced" : "indented",
+                        emDelimiter: emDelimiter ? "*" : "_",
+                    });
+
+                    const markdown = turndownService.turndown(inputText);
+                    outputText.value = markdown;
+
+                    // Auto-expand output field
+                    outputText.style.height = "auto";
+                    outputText.style.height = outputText.scrollHeight + "px";
+                } catch (err) {
+                    error.textContent =
+                        "An error occurred during conversion. Please check your HTML.";
+                    console.error(err);
+                } finally {
+                    button.disabled = false;
+                    loading.style.display = "none";
+                }
+            }
+
+            // Initialize
+            document.addEventListener("DOMContentLoaded", loadConfig);
+            document
+                .getElementById("saveConfig")
+                .addEventListener("click", saveConfig);
+            document
+                .getElementById("convertBtn")
+                .addEventListener("click", convertToMarkdown);
+            document
+                .getElementById("configToggle")
+                .addEventListener("click", toggleConfig);
+
+            // Add auto-expand functionality to output textarea
+            const outputText = document.getElementById("outputText");
+            outputText.addEventListener("input", function () {
+                this.style.height = "auto";
+                this.style.height = this.scrollHeight + "px";
+            });
+        </script>
+    </body>
+</html>
