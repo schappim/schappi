@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Medium | Marcus Schappi</title>
+        <script
+            src="https://kit.fontawesome.com/2d5a909a29.js"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js"
+            defer
+        ></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            .kalam-light {
+                font-family: "Kalam", cursive;
+                font-weight: 300;
+                font-style: normal;
+            }
+
+            .kalam-regular {
+                font-family: "Kalam", cursive;
+                font-weight: 400;
+                font-style: normal;
+            }
+
+            .kalam-bold {
+                font-family: "Kalam", cursive;
+                font-weight: 700;
+                font-style: normal;
+            }
+
+            /* styling paper */
+            .paper {
+                position: relative;
+                margin: 20px auto;
+
+                background-color: #fefce8;
+                color: #451a03;
+            }
+
+            /* styling red vertical line */
+            .paper::before {
+                content: "";
+                width: 2px;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 40px;
+                background-color: rgba(255, 0, 0, 0.2);
+            }
+
+            .expansion {
+                background-color: greenyellow;
+            }
+
+            /* styling blue horizontal lines */
+            .pattern {
+                height: 100%;
+                background-image: repeating-linear-gradient(
+                    #fefce8 0px,
+                    #fefce8 24px,
+                    rgba(251, 191, 36, 0.2) 25px
+                );
+            }
+
+            .pattern.expansion {
+                background-image: repeating-linear-gradient(
+                    greenyellow 0px,
+                    greenyellow 24px,
+                    rgba(251, 191, 36, 0.2) 25px
+                );
+            }
+
+            td ul li {
+                padding-bottom: 1rem;
+            }
+
+            ol li {
+                padding-bottom: 1rem;
+                list-style-type: decimal;
+                padding-left: 1rem;
+                display: list-item;
+                margin-left: 1rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="flex justify-center p-4 lg:p-16 text-lg">
+            <div class="w-full max-w-prose flex flex-col space-y-8">
+                <div>
+                    <a class="text-blue-600 underline" href="/">← Back Home</a>
+                </div>
+
+                <h1 class="text-4xl font-black text-center">Medium</h1>
+                <p>
+                    Rarely does anyone intentionally ask for &quot;medium.&quot;
+                    We ask for groundbreaking solutions, lightning-fast apps, or
+                    enduring legacies. We rarely request the perfectly average,
+                    just-okay, comfortably moderate middle ground.
+                </p>
+                <p class="font-semibold">
+                    But medium is surprisingly prevalent.
+                </p>
+                <p>
+                    Medium-sized projects shape our lives quietly. They
+                    don&#39;t change history overnight, nor do they linger
+                    poetically over centuries. Medium is the steady hum of a
+                    printer that&#39;s neither impressively fast nor
+                    frustratingly slow&nbsp;&mdash;&nbsp;it just reliably spits
+                    out paper at an acceptable pace.
+                </p>
+                <p class="font-semibold">Medium is reassuring.</p>
+                <p>
+                    Medium effort is the sweet spot of human ambition. Consider
+                    your weekly team meetings&nbsp;&mdash;&nbsp;rarely
+                    transformative, often repetitive, but necessary enough to
+                    keep your project vaguely on track. Medium is the comfort of
+                    predictable bureaucracy; processes that take exactly long
+                    enough for you to finish a coffee and check your email.
+                </p>
+                <p class="font-semibold">Medium software is profoundly okay.</p>
+                <p>
+                    Software with medium performance rarely gets noticed.
+                    It&#39;s neither praised nor condemned&nbsp;&mdash;&nbsp;it
+                    just works. Like Microsoft Word auto-saving your document
+                    every 10 minutes, medium doesn&#39;t thrill, but it quietly
+                    prevents disaster.
+                </p>
+                <p>
+                    Google Docs when your internet is &quot;just
+                    fine&quot;&nbsp;&mdash;&nbsp;not blazing-fast fibre, not
+                    laggy airplane WiFi&nbsp;&mdash;&nbsp;just an average home
+                    connection. Medium latency: you notice it, you sigh briefly,
+                    and move on with life.
+                </p>
+                <p class="font-semibold">Medium demands moderate complexity.</p>
+                <p>
+                    To achieve medium, you balance adding features with mild
+                    neglect. Consider Slack’s load time: not instantaneous, not
+                    painfully slow, just enough to glance at a notification
+                    without impatience. This moderation requires subtle
+                    discipline&nbsp;&mdash;&nbsp;enough focus to avoid becoming
+                    slow, yet never enough obsession to become fast.
+                </p>
+                <p class="font-semibold">
+                    Medium institutions are quietly durable.
+                </p>
+                <p>
+                    A medium-sized local business doesn&#39;t inspire
+                    documentaries or last millennia. It exists profitably for
+                    decades, unnoticed by history but beloved locally. Medium is
+                    your town’s second-best café&nbsp;&mdash;&nbsp;good enough
+                    to keep regular customers, not good enough for tourists to
+                    Instagram.
+                </p>
+                <p>
+                    Medium-scale science experiments run comfortably within
+                    grant cycles. They provide useful insights without
+                    revolutionising fields overnight. Medium is a longitudinal
+                    study that wraps up neatly in 15 years, influencing policy
+                    just enough to matter, never enough to dramatically shift
+                    paradigms.
+                </p>
+                <p class="font-semibold">Medium is amusingly ordinary.</p>
+                <p>
+                    We celebrate medium typing speeds: fast enough for emails,
+                    not impressive enough for bragging rights. We adjust our
+                    expectations accordingly&nbsp;&mdash;&nbsp;never
+                    disappointed, rarely delighted, always satisfied enough to
+                    continue.
+                </p>
+                <p class="font-semibold">Medium is relatively relative.</p>
+                <p>
+                    When everyone chases extremes&nbsp;&mdash;&nbsp;fastest,
+                    longest, greatest&nbsp;&mdash;&nbsp;medium remains
+                    steadfastly achievable. It doesn&#39;t promise magic or
+                    legacy, just quiet reliability. Medium acknowledges our
+                    limits, accepts compromise, and delivers precisely the
+                    modest impact it promised.
+                </p>
+                <p>
+                    Ultimately, medium is neither impressive nor disappointing;
+                    it’s comfortingly adequate.
+                </p>
+                <p>
+                    If you enjoyed this, you might moderately appreciate
+                    something else.
+                </p>
+            </div>
+        </div>
+    </body>
+    <script>
+        <!--
+        x;
+        -->
+    </script>
+</html>
